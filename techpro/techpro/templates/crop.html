@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Recommendation Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <a href="{% url 'home' %}" class="btn btn-secondary back-button">Back</a>
+        <br>
+        <h1>Crop Recommendation Form</h1>
+
+        {% if predicted_crop %}
+        <div class="card mt-4">
+            <div class="card-body">
+                
+                <p class="card-text">Based on the provided data, the recommended crop is <strong>{{ predicted_crop }}</strong>.</p>
+            </div>
+        </div>
+        {% endif %}
+
+        <form method="POST" action="{% url 'croprec' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="nitrate">Nitrate</label>
+                <input type="text" class="form-control" id="nitrate" name="nitrate" required>
+            </div>
+            <div class="form-group">
+                <label for="phosphorus">Phosphorus</label>
+                <input type="text" class="form-control" id="phosphorus" name="phosphorus" required>
+            </div>
+            <div class="form-group">
+                <label for="potassium">Potassium</label>
+                <input type="text" class="form-control" id="potassium" name="potassium" required>
+            </div>
+            <div class="form-group">
+                <label for="temperature">Temperature</label>
+                <input type="text" class="form-control" id="temperature" name="temperature" required>
+            </div>
+            <div class="form-group">
+                <label for="humidity">Humidity</label>
+                <input type="text" class="form-control" id="humidity" name="humidity" required>
+            </div>
+            <div class="form-group">
+                <label for="ph">pH</label>
+                <input type="text" class="form-control" id="ph" name="ph" required>
+            </div>
+            <div class="form-group">
+                <label for="rainfall">Rainfall</label>
+                <input type="text" class="form-control" id="rainfall" name="rainfall" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        <!-- Display recommended crop -->
+        
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

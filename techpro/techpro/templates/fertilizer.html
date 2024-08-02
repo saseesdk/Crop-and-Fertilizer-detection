@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fertilizer Recommendation Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style> .back-button {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+    }</style>
+</head>
+<body>
+    <div class="container mt-5">
+        <a href="{% url 'home' %}" class="btn btn-secondary back-button">Back</a>
+        <br>
+        <h1>Fertilizer Recommendation Form</h1>
+
+        {% if predicted_fertilizer %}
+        <div class="card mt-4">
+            <div class="card-body">
+                
+                <p class="card-text">Based on the provided data, the recommended fertilizer is <strong>{{ predicted_fertilizer }}</strong>.</p>
+            </div>
+        </div>
+        {% endif %}
+        <form method="POST" action="{% url 'fertrec' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="temperature">Temperature</label>
+                <input type="text" class="form-control" id="temperature" name="temperature" required>
+            </div>
+            <div class="form-group">
+                <label for="humidity">Humidity</label>
+                <input type="text" class="form-control" id="humidity" name="humidity" required>
+            </div>
+            <div class="form-group">
+                <label for="moisture">Moisture</label>
+                <input type="text" class="form-control" id="moisture" name="moisture" required>
+            </div>
+            <div class="form-group">
+                <label for="soil_type">Soil Type</label>
+                <input type="text" class="form-control" id="soil_type" name="soil_type" required>
+            </div>
+            <div class="form-group">
+                <label for="crop_type">Crop Type</label>
+                <input type="text" class="form-control" id="crop_type" name="crop_type" required>
+            </div>
+            <div class="form-group">
+                <label for="nitrogen">Nitrogen</label>
+                <input type="text" class="form-control" id="nitrogen" name="nitrogen" required>
+            </div>
+            <div class="form-group">
+                <label for="potassium">Potassium</label>
+                <input type="text" class="form-control" id="potassium" name="potassium" required>
+            </div>
+            <div class="form-group">
+                <label for="phosphorus">Phosphorus</label>
+                <input type="text" class="form-control" id="phosphorus" name="phosphorus" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        <!-- Display recommended fertilizer -->
+       
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
